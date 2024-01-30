@@ -102,13 +102,22 @@ in
     gzip
     unzip
 
-    (python3.withPackages (p: with p; [
-      pandas
-      geopandas
-      shapely
-      osmnx
-      plotly
-    ]))
+    poetry
+    pyright
+
+    # This function creates python with installed packages defined in
+    # your poetry project.
+    (poetry2nix.mkPoetryEnv {
+      pyproject = ./pyproject.toml;
+      poetrylock = ./poetry.lock;
+      # Needed otherwise nix tries to build it from source
+      preferWheels = true;
+      overrides = poetry2nix.overrides.withDefaults (self: super: {
+        pyjstat = super.pyjstat.overridePythonAttrs (old: {
+          buildInputs = [ super.setuptools ];
+        });
+      });
+    })
 
     (rWrapper.override { packages = r-packages; })
     (rstudioWrapper.override { packages = r-packages; })
