@@ -3,29 +3,44 @@
 let
   # Defining a variable with a list of R packages
   r-packages = with pkgs.rPackages; [
-    abind # multi dimentional arrays
-    devtools # developing r packages
-    dplyr # data manipulation
-    forcats # categorical variables
-    ggmap # maps
-    ggplot2 # visualisations
-    httr # APIs (superseded)
-    httr2 # APIs
-    httpgd # running server
-    osmdata # fetching data from OSM
-    purrr # functional
+    abind     # multi dimentional arrays
+    devtools  # developing r packages
+    dplyr     # data manipulation
+    forcats   # categorical variables
+    ggmap     # maps
+    ggplot2   # visualisations
+    httpgd    # running server
+    httr      # APIs (superseded)
+    httr2     # APIs
+    osmdata   # fetching data from OSM
+    purrr     # functional
     rayrender # 3d
     rayshader # 3d
-    readr # reading rectangular
-    sf # spatial
-    stars # raster
-    stringr # strings
-    styler # r
-    tibble # nice
-    tidyr # data
+    readr     # reading rectangular
+    sf        # spatial
+    stars     # raster
+    stringr   # strings
+    styler    # r
+    tibble    # nice
+    tidyr     # data
     tidyverse # ihateit
-    tmap # maps
+    tmap      # maps
   ];
+
+  # This is an example of how nix can download something from a github
+  # repository.
+  poetry2nix-source = pkgs.fetchFromGitHub {
+    owner = "nix-community";
+    repo = "poetry2nix";
+    rev = "528d500ea826383cc126a9be1e633fc92b19ce5d";
+    sha256 = "sha256:1q245v4q0bb30ncfj66gl6dl1k46am28x7kjj6d3y7r6l4fzppq8";
+  };
+
+  # poetr2nix is a nice project that allow to extend nix
+  # configurations with poetry. Note that python packages are defined
+  # in a separate file (pyproject.toml). To add a new dependency add
+  # it to pyproject.toml file and run `poetry lock --no-update`.
+  poetry2nix = import poetry2nix-source { inherit pkgs; };
 in
 {
   imports = [
