@@ -101,6 +101,7 @@ in
     gnome.nautilus
     gzip
     unzip
+    flameshot
 
     poetry
     pyright
@@ -115,6 +116,12 @@ in
       overrides = poetry2nix.overrides.withDefaults (self: super: {
         pyjstat = super.pyjstat.overridePythonAttrs (old: {
           buildInputs = [ super.setuptools ];
+        });
+        cykhash = super.cykhash.overridePythonAttrs (old: {
+          buildInputs = [ super.setuptools super.cython ];
+        });
+        pyrobuf = super.pyrobuf.overridePythonAttrs (old: {
+          buildInputs = [ super.setuptools super.pytest-runner ];
         });
       });
     })
