@@ -32,8 +32,8 @@ let
   poetry2nix-source = pkgs.fetchFromGitHub {
     owner = "nix-community";
     repo = "poetry2nix";
-    rev = "528d500ea826383cc126a9be1e633fc92b19ce5d";
-    sha256 = "sha256:1q245v4q0bb30ncfj66gl6dl1k46am28x7kjj6d3y7r6l4fzppq8";
+    rev = "3c92540611f42d3fb2d0d084a6c694cd6544b609";
+    sha256 = "sha256:1jfrangw0xb5b8sdkimc550p3m98zhpb1fayahnr7crg74as4qyq";
   };
 
   # poetr2nix is a nice project that allow to extend nix
@@ -48,6 +48,7 @@ in
   ];
 
   # User configuration
+  nixpkgs.config.allowUnfree = true;
   nix.package = pkgs.nix_2_3; # Latest nice nix version
   nix.settings.trusted-users = [ "kamiladcr" ];
   users.users.kamiladcr = {
@@ -102,6 +103,10 @@ in
     gzip
     unzip
     flameshot
+    pandoc
+    ispell
+
+    vscode
 
     poetry
     pyright
