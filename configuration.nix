@@ -87,6 +87,9 @@ in
   # Life in Oslo
   time.timeZone = "Europe/Oslo";
 
+  # guest additions for virtual box
+  virtualisation.virtualbox.guest.enable = true;
+
   # Default terminal is alcritty now (it's great!)
   environment.sessionVariables.TERMINAL = [ "alacritty" ];
 
