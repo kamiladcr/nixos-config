@@ -121,17 +121,29 @@ in
       poetrylock = ./poetry.lock;
       # Needed otherwise nix tries to build it from source
       preferWheels = true;
-      overrides = poetry2nix.overrides.withDefaults (self: super: {
-        pyjstat = super.pyjstat.overridePythonAttrs (old: {
-          buildInputs = [ super.setuptools ];
-        });
-        cykhash = super.cykhash.overridePythonAttrs (old: {
-          buildInputs = [ super.setuptools super.cython ];
-        });
-        pyrobuf = super.pyrobuf.overridePythonAttrs (old: {
-          buildInputs = [ super.setuptools super.pytest-runner ];
-        });
-      });
+      overrides = [
+        (self: super: {
+          packaging = pkgs.python3Packages.packaging;
+          numba = super.numba.overridePythonAttrs (old: {
+            nativeBuildInputs = [ pkgs.tbb ];
+          });
+          pyjstat = super.pyjstat.overridePythonAttrs (old: {
+            buildInputs = [ super.setuptools ];
+          });
+          cykhash = super.cykhash.overridePythonAttrs (old: {
+            buildInputs = [ super.setuptools super.cython ];
+          });
+          pyrobuf = super.pyrobuf.overridePythonAttrs (old: {
+            buildInputs = [ super.setuptools super.pytest-runner ];
+          });
+          spint = super.spint.overridePythonAttrs (old: {
+            buildInputs = [ super.setuptools ];
+          });
+          spvcm = super.spvcm.overridePythonAttrs (old: {
+            buildInputs = [ super.setuptools ];
+          });
+        })
+      ];
     })
 
     (rWrapper.override { packages = r-packages; })
