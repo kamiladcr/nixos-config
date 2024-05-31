@@ -51,6 +51,8 @@ in
   nixpkgs.config.allowUnfree = true;
   nix.package = pkgs.nix_2_3; # Latest nice nix version
   nix.settings.trusted-users = [ "kamiladcr" ];
+  # nix.settings.max-jobs = "auto";
+  # nix.settings. = [ "kamiladcr" ];
   users.users.kamiladcr = {
     isNormalUser = true;
     extraGroups = [ "vboxsf" "wheel" ];
