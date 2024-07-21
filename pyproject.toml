@@ -33,6 +33,8 @@ ruff = "^0.1.11"
 scikit-learn = "^1.3.2"
 seaborn = "^0.13.1"
 shapely = "^2.0.2"
+keplergl = "^0.3.2"
+jupyter_packaging = "^0.12.3"
 
 [build-system]
 requires = ["poetry-core"]

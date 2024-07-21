@@ -126,6 +126,7 @@ in
       overrides = [
         (self: super: {
           packaging = pkgs.python3Packages.packaging;
+          wheel = pkgs.python3Packages.wheel;
           numba = super.numba.overridePythonAttrs (old: {
             nativeBuildInputs = [ pkgs.tbb ];
           });
@@ -143,6 +144,9 @@ in
           });
           spvcm = super.spvcm.overridePythonAttrs (old: {
             buildInputs = [ super.setuptools ];
+          });
+          keplergl = super.keplergl.overridePythonAttrs (old: {
+            buildInputs = [ super.setuptools super.jupyter-packaging ];
           });
         })
       ];
