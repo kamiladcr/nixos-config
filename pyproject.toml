@@ -35,6 +35,7 @@ seaborn = "^0.13.1"
 shapely = "^2.0.2"
 keplergl = "^0.3.2"
 jupyter_packaging = "^0.12.3"
+pydeck = "^0.9.1"
 
 [build-system]
 requires = ["poetry-core"]
