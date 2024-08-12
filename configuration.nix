@@ -89,6 +89,12 @@ in
   # Life in Oslo
   time.timeZone = "Europe/Oslo";
 
+  # Allow accessing to any ports on this VM
+  networking.firewall.enable  = false;
+
+  # Allow connecting through ssh (remote connection)
+  services.openssh.enable = true;
+
   # guest additions for virtual box
   virtualisation.virtualbox.guest.enable = true;
 
