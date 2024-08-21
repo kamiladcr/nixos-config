@@ -101,6 +101,12 @@ in
   # Default terminal is alcritty now (it's great!)
   environment.sessionVariables.TERMINAL = [ "alacritty" ];
 
+  # git large file storage
+  programs.git = {
+        enable = true;
+        lfs.enable = true;
+    };
+
   # Packages to be installed globally
   environment.systemPackages = with pkgs; [
     alacritty
