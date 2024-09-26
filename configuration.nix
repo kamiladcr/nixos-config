@@ -101,33 +101,36 @@ in
   # Default terminal is alcritty now (it's great!)
   environment.sessionVariables.TERMINAL = [ "alacritty" ];
 
+  fonts.packages = with pkgs; [
+    iosevka
+  ];
+  
   # git large file storage
   programs.git = {
-        enable = true;
-        lfs.enable = true;
-    };
+    enable = true;
+    lfs.enable = true;
+  };
 
   # Packages to be installed globally
   environment.systemPackages = with pkgs; [
     alacritty
-    emacs29
-    git
-    nixos-option
-
+    bottom
     chromium
-    tdesktop
+    emacs29
+    flameshot
+    git
     gnome.nautilus
     gzip
-    unzip
-    flameshot
-    pandoc
     ispell
-
-    vscode
-
+    nixos-option
+    pandoc
     poetry
+    prettierd
     pyright
-
+    tdesktop
+    unzip
+    vscode
+    
     # This function creates python with installed packages defined in
     # your poetry project.
     (poetry2nix.mkPoetryEnv {
