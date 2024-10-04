@@ -37,6 +37,8 @@ keplergl = "^0.3.2"
 jupyter_packaging = "^0.12.3"
 pydeck = "^0.9.1"
 
+kaleido = "0.2.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
