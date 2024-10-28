@@ -65,10 +65,9 @@ in
   users.defaultUserShell = pkgs.fish;
 
   # Enable graphical accelleration (needed for 3d)
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   # Desktop environment
@@ -79,13 +78,19 @@ in
     videoDrivers = [ "virtualbox" "vmware" "cirrus" "vesa" "modesetting" ];
   };
 
-  # Windows onedrive file share
+  # Windows file share
   fileSystems."/mnt/windows" = {
     fsType = "vboxsf";
     device = "N";
     options = [ "rw" ];
   };
 
+  # fileSystems."/mnt/sdrive" = {
+  #   fsType = "vboxsf";
+  #   device = "S";
+  #   options = [ "rw" ];
+  # };
+  
   # Life in Oslo
   time.timeZone = "Europe/Oslo";
 
@@ -111,18 +116,24 @@ in
     lfs.enable = true;
   };
 
+  # Replace command-not-found with nix-index
+  programs.nix-index.enable = true;
+  programs.nix-index.enableFishIntegration = true;
+  programs.command-not-found.enable = false;
+  
   # Packages to be installed globally
   environment.systemPackages = with pkgs; [
     alacritty
     bottom
     chromium
-    emacs29
+    emacs30
     flameshot
     git
-    gnome.nautilus
+    nautilus
     gzip
     ispell
     nixos-option
+    osmium-tool
     pandoc
     poetry
     prettierd
@@ -151,9 +162,9 @@ in
           cykhash = super.cykhash.overridePythonAttrs (old: {
             buildInputs = [ super.setuptools super.cython ];
           });
-          pyrobuf = super.pyrobuf.overridePythonAttrs (old: {
-            buildInputs = [ super.setuptools super.pytest-runner ];
-          });
+          # pyrobuf = super.pyrobuf.overridePythonAttrs (old: {
+          #   buildInputs = [ super.setuptools super.pytest-runner ];
+          # });
           spint = super.spint.overridePythonAttrs (old: {
             buildInputs = [ super.setuptools ];
           });
