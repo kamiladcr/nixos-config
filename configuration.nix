@@ -90,7 +90,7 @@ in
   #   device = "S";
   #   options = [ "rw" ];
   # };
-  
+
   # Life in Oslo
   time.timeZone = "Europe/Oslo";
 
@@ -109,7 +109,7 @@ in
   fonts.packages = with pkgs; [
     iosevka
   ];
-  
+
   # git large file storage
   programs.git = {
     enable = true;
@@ -120,28 +120,34 @@ in
   programs.nix-index.enable = true;
   programs.nix-index.enableFishIntegration = true;
   programs.command-not-found.enable = false;
-  
+
   # Packages to be installed globally
   environment.systemPackages = with pkgs; [
     alacritty
     bottom
     chromium
     emacs30
+    emacsPackages.jinx
+    enchant
     flameshot
     git
-    nautilus
     gzip
+    hunspellDicts.en-us
+    hunspellDicts.nb_NO
     ispell
+    nautilus
     nixos-option
     osmium-tool
     pandoc
     poetry
     prettierd
     pyright
+    qgis
+    ripgrep
     tdesktop
     unzip
     vscode
-    
+
     # This function creates python with installed packages defined in
     # your poetry project.
     (poetry2nix.mkPoetryEnv {
@@ -174,6 +180,7 @@ in
           keplergl = super.keplergl.overridePythonAttrs (old: {
             buildInputs = [ super.setuptools super.jupyter-packaging ];
           });
+          kaleido = pkgs.python3Packages.kaleido;
         })
       ];
     })
