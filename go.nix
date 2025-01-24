@@ -74,6 +74,9 @@ in
   # Windows
   programs.niri.enable = true;
 
+  # Disable gnome keyring
+  services.gnome.gnome-keyring.enable = lib.mkForce false;
+
   # Environment variables
   environment.variables = {
     # Enable native support for chrome
