@@ -1,0 +1,41 @@
+{
+  "pins": {
+    "Jovian-NixOS": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Jovian-Experiments",
+        "repo": "Jovian-NixOS"
+      },
+      "branch": "development",
+      "revision": "2dd65c3c92a4b8b1bf653657ae8648b883a4d427",
+      "url": "https://github.com/Jovian-Experiments/Jovian-NixOS/archive/2dd65c3c92a4b8b1bf653657ae8648b883a4d427.tar.gz",
+      "hash": "0nx81cb7lwn7d2nbdsv5w0mf021wqwbailsf9r7rw3ci2x9xl4gn"
+    },
+    "home-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "home-manager"
+      },
+      "branch": "release-24.11",
+      "revision": "bd65bc3cde04c16755955630b344bc9e35272c56",
+      "url": "https://github.com/nix-community/home-manager/archive/bd65bc3cde04c16755955630b344bc9e35272c56.tar.gz",
+      "hash": "15k41il0mvmwyv6jns4z8k6khhmb22jk5gpcqs1paym3l01g6abn"
+    },
+    "nixpkgs": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "NixOS",
+        "repo": "nixpkgs"
+      },
+      "branch": "master",
+      "revision": "60f0924f468590dde6787ae00ea37d05ca81931f",
+      "url": "https://github.com/NixOS/nixpkgs/archive/60f0924f468590dde6787ae00ea37d05ca81931f.tar.gz",
+      "hash": "0v3wlxqifaqzj4sjnd461h7b81lmk10hg6c9765h0zzxyzk5bml9"
+    }
+  },
+  "version": 3
+}

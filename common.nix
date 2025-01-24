@@ -1,6 +1,8 @@
 { config, pkgs, lib,  ... }:
 
 let
+  sources = import ./npins/default.nix;
+
   # Defining a variable with a list of R packages
   r-packages = with pkgs.rPackages; [
     abind     # multi dimentional arrays
@@ -44,10 +46,14 @@ let
 in
 {
   # User configuration
-  nixpkgs.config.allowUnfree = true;
   nix.package = pkgs.nix_2_3; # Latest nice nix version
   nix.settings.trusted-users = [ "kamiladcr" ];
   nix.settings.max-jobs = "auto";
+
+  nix.nixPath = ["nixpkgs=${sources.nixpkgs}:nixos-config=/etc/nixos/configuration.nix"];
+  nixpkgs.pkgs = (import sources.nixpkgs {
+    config.allowUnfree = lib.mkForce true;
+  });
 
   users.users.kamiladcr = {
     isNormalUser = true;
@@ -108,8 +114,8 @@ in
   environment.systemPackages = with pkgs; [
     alacritty
     bottom
-    chromium
-    emacs30
+    google-chrome
+    emacs30-pgtk
     emacsPackages.jinx
     enchant
     flameshot
@@ -120,8 +126,8 @@ in
     ispell
     nautilus
     nixos-option
+    onedrive
     osmium-tool
-    pandoc
     poetry
     prettierd
     pyright
@@ -169,6 +175,5 @@ in
     })
 
     (rWrapper.override { packages = r-packages; })
-    (rstudioWrapper.override { packages = r-packages; })
   ];
 }
