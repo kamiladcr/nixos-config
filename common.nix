@@ -17,7 +17,6 @@ let
     osmdata   # fetching data from OSM
     purrr     # functional
     rayrender # 3d
-    rayshader # 3d
     readr     # reading rectangular
     sf        # spatial
     stars     # raster
@@ -57,7 +56,7 @@ in
 
   users.users.kamiladcr = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "vboxsf" "wheel" ];
+    extraGroups = [ "networkmanager" "vboxsf" "wheel" "gamemode" ];
     initialPassword = "demo";
     uid = 1000;
   };
@@ -136,6 +135,8 @@ in
     tdesktop
     unzip
     vscode
+    pavucontrol
+    firefox
 
     # This function creates python with installed packages defined in
     # your poetry project.

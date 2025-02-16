@@ -1,25 +1,41 @@
 { config, pkgs, lib,  ... }:
 
 let
-  user = "kamiladcr";
   sources = import ./npins/default.nix;
 in
 {
   imports = [
     "${sources.home-manager}/nixos" # Home dotfiles
     "${sources.Jovian-NixOS}/modules" # SteamOS
+    ./desktop.nix
+    ./steam.nix
   ];
 
+  # Enable power saving defaults
   powerManagement.enable = true;
 
   boot = {
     # Boot configuration
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    loader.timeout = 0;
-    loader.systemd-boot.consoleMode = "max";
+    loader = {
+      efi.canTouchEfiVariables = true;
+      timeout = 0;
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
+    };
 
+    # Kernel config
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [ "zenpower" "acpi_call" ];
+
+    # Disable default CPU sensor
+    blacklistedKernelModules = [ "k10temp" ];
+
+    extraModulePackages = with config.boot.kernelPackages; [
+      zenpower # better CPU sensors
+      acpi_call # TDP controls
+    ];
   };
 
   networking.hostName = "oslo"; # hostname
@@ -31,27 +47,14 @@ in
   # Internationalisation properties
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system
-  services.xserver.enable = true;
-
-  # Enable compatibility with older applications
-  programs.xwayland.enable = true;
-
-  # Additional packages
+  # Additional system packages
   environment.systemPackages = with pkgs; [
     # Nix
     npins
     (writeShellScriptBin "nixos-switch" (builtins.readFile ./nixos-switch))
 
-    # Niri
-    wl-clipboard
-    xwayland-satellite
-    swaylock
-    rofi-wayland
-
-    # For gaming
-    torzu # Nintendo emulator
-    steam-rom-manager # Add Nintendo games to steam
+    # Utils
+    htop
   ];
 
   # Configure keymap
@@ -60,146 +63,11 @@ in
 
   # Enable sound with pipewire
   services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  ################################
-  ##### DESKTOP CONFIGURATION ####
-
-  # Windows
-  programs.niri.enable = true;
-
-  # Disable gnome keyring
-  services.gnome.gnome-keyring.enable = lib.mkForce false;
-
-  # Environment variables
-  environment.variables = {
-    # Enable native support for chrome
-    NIXOS_OZONE_WL = 1;
-    # Use emacs by default
-    EDITOR = "emacsclient";
-  };
-
-  # Home-directory configuration
-  home-manager.useGlobalPkgs = true;
-  home-manager.users.kamiladcr = {
-    # Notifications
-    services.dunst.enable = true;
-
-    # Status bar
-    programs.waybar.enable = true;
-    programs.waybar.settings.main = {
-      height = 20;
-      layer = "top";
-      position = "top";
-      modules-left = [
-        "niri/workspaces"
-        "wlr/taskbar"
-      ];
-      modules-right = [
-        "tray"
-        "niri/language"
-        "disk"
-        "network"
-        "clock"
-        "battery"
-        "custom/exit"
-      ];
-      "wlr/taskbar" = {
-        on-click = "activate";
-      };
-      "niri/language" = {
-        format = "{short}";
-      };
-      disk = {
-        format = "{free}";
-      };
-      network = {
-        interface = "wlp1s0";
-        format = "{ifname}";
-        format-wifi = "{essid} ({signalStrength}%)";
-      };
-      "custom/exit" = {
-        format = "OUT";
-        tooltip = "Touch to exit the session";
-        on-click = "niri msg action quit --skip-confirmation";
-      };
-    };
-    programs.waybar.style = ''
-      * {
-          background: transparent;
-          color: white;
-          padding: 0 3px;
-          font-family: JetBrainsMono;
-          font-size: 12px;
-          border-radius: 0px;
-      }
-      #tray menu {
-        background-color: #333333;
-        color: white;
-      }
-      #tray menu menuitem:hover {
-        background-color: gray;
-      }
-      #workspaces button.focused {
-        background-color: #333333;
-      }
-      #battery.charging {
-          background-color: #333333;
-      }
-    '';
-
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-      font = "JetBrains Mono 10";
-      theme = "gruvbox-dark";
-    };
-
-    # Keeping home-manager and system state in sync
-    home.enableNixpkgsReleaseCheck = false;
-    home.stateVersion = "24.11";
-  };
-
-  ##############################
-  ##### STEAM CONFIGURATION ####
-
-  # Handheld Daemon to control hardware
-  services.handheld-daemon = {
-    inherit user;
-    enable = true;
-    ui.enable = true;
-  };
-
-  jovian.steam = {
-    inherit user;
-    enable = true;
-    autoStart = true;
-    desktopSession = "niri";
-  };
-
-  services.displayManager.autoLogin = {
-    inherit user;
-    enable = true;
-  };
-
-  jovian.decky-loader = {
-    inherit user;
-    enable = true;
-  };
-
-  programs.steam = {
-    enable = true;
-    extest.enable = true;
-    remotePlay.openFirewall = true;
-    extraCompatPackages = [
-      pkgs.proton-ge-bin
-    ];
   };
 
   # This value determines the NixOS release from which the default
