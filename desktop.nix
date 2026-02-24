@@ -9,9 +9,26 @@
 
   # Windows
   programs.niri.enable = true;
+  programs.ewm.enable = true;
+
+  # Shell (top panel)
+  programs.dms-shell = {
+    enable = true;
+    package = pkgs.dms-shell.overrideAttrs {
+      vendorHash = "sha256-cVUJXgzYMRSM0od1xzDVkMTdxHu3OIQX2bQ8AJbGQ1Q=";
+      src = pkgs.fetchFromGitHub {
+        owner = "AvengeMedia";
+        repo = "DankMaterialShell";
+        rev = "9723661c80babc97637319d312eeeb2a3e53f8a7";
+        hash = "sha256-3/8DjcoLrqWrJR8QyyzvsFOeej4V5JIq4kMYQF0vccs=";
+      };
+    };
+    systemd.enable = true;
+    systemd.restartIfChanged = true;
+  };
 
   # Disable gnome keyring so that Chromium is not showing a popup
-  services.gnome.gnome-keyring.enable = lib.mkForce false;
+  # services.gnome.gnome-keyring.enable = lib.mkForce false;
 
   # Additional desktop packages
   environment.systemPackages = with pkgs; [
@@ -19,13 +36,11 @@
     wl-clipboard
     xwayland-satellite
     swaylock
-    rofi-wayland
+    rofi
   ];
 
   # Environment variables
   environment.variables = {
-    # Enable native support for chrome
-    NIXOS_OZONE_WL = 1;
     # Use emacs by default
     EDITOR = "emacsclient";
   };
@@ -53,7 +68,6 @@
         "network"
         "clock"
         "battery"
-        "custom/exit"
       ];
       clock = {
         format = "{:%d-%m-%Y %H:%M}";
@@ -68,14 +82,9 @@
         format = "{free}";
       };
       network = {
-        interface = "wlp1s0";
+        interface = "wlp194s0";
         format = "{ifname}";
         format-wifi = "{essid} ({signalStrength}%)";
-      };
-      "custom/exit" = {
-        format = "OUT";
-        tooltip = "Touch to exit the session";
-        on-click = "niri msg action quit --skip-confirmation";
       };
     };
     programs.waybar.style = ''
@@ -104,11 +113,10 @@
 
     programs.rofi = {
       enable = true;
-      package = pkgs.rofi-wayland;
+      package = pkgs.rofi;
       font = "JetBrains Mono 10";
       theme = "gruvbox-dark";
     };
-
 
     # Configure pointer
     home.pointerCursor = {

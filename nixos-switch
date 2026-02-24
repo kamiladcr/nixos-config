@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-# assume that if there are no args, you want to switch to the configuration
-cmd=${1:-switch}
-shift
-
-nixpkgs_pin=$(nix eval --raw -f /etc/nixos/npins/default.nix nixpkgs)
-nix_path="nixpkgs=${nixpkgs_pin}:nixos-config=/etc/nixos/configuration.nix"
-
-# without --fast, nixos-rebuild will compile nix and use the compiled nix to
-# evaluate the config, wasting several seconds
-sudo env NIX_PATH="${nix_path}" nixos-rebuild "$cmd" --fast "$@"
+sudo nixos-rebuild switch \
+     -I nixpkgs=$(nix-instantiate --eval --raw /etc/nixos/npins/default.nix -A nixpkgs.outPath) \
+     -I nixos-config="/etc/nixos/configuration.nix"

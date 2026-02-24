@@ -1,16 +1,31 @@
 {
   "pins": {
-    "Jovian-NixOS": {
+    "build-system-pkgs": {
       "type": "Git",
       "repository": {
         "type": "GitHub",
-        "owner": "Jovian-Experiments",
-        "repo": "Jovian-NixOS"
+        "owner": "pyproject-nix",
+        "repo": "build-system-pkgs"
       },
-      "branch": "development",
-      "revision": "2dd65c3c92a4b8b1bf653657ae8648b883a4d427",
-      "url": "https://github.com/Jovian-Experiments/Jovian-NixOS/archive/2dd65c3c92a4b8b1bf653657ae8648b883a4d427.tar.gz",
-      "hash": "0nx81cb7lwn7d2nbdsv5w0mf021wqwbailsf9r7rw3ci2x9xl4gn"
+      "branch": "master",
+      "submodules": false,
+      "revision": "042904167604c681a090c07eb6967b4dd4dae88c",
+      "url": "https://github.com/pyproject-nix/build-system-pkgs/archive/042904167604c681a090c07eb6967b4dd4dae88c.tar.gz",
+      "hash": "sha256-4bocaOyLa3AfiS8KrWjZQYu+IAta05u3gYZzZ6zXbT0="
+    },
+    "ewm": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://codeberg.org/",
+        "owner": "ezemtsov",
+        "repo": "ewm"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "ce72db30d4228b9f0ab36fdb006bf743a8fdb813",
+      "url": "https://codeberg.org/ezemtsov/ewm/archive/ce72db30d4228b9f0ab36fdb006bf743a8fdb813.tar.gz",
+      "hash": "sha256-ukdLOa9ucrRap+NssPX5vFm73pEgKByx5LDT4hr+EXs="
     },
     "home-manager": {
       "type": "Git",
@@ -19,10 +34,11 @@
         "owner": "nix-community",
         "repo": "home-manager"
       },
-      "branch": "release-24.11",
-      "revision": "bd65bc3cde04c16755955630b344bc9e35272c56",
-      "url": "https://github.com/nix-community/home-manager/archive/bd65bc3cde04c16755955630b344bc9e35272c56.tar.gz",
-      "hash": "15k41il0mvmwyv6jns4z8k6khhmb22jk5gpcqs1paym3l01g6abn"
+      "branch": "release-25.11",
+      "submodules": false,
+      "revision": "0d782ee42c86b196acff08acfbf41bb7d13eed5b",
+      "url": "https://github.com/nix-community/home-manager/archive/0d782ee42c86b196acff08acfbf41bb7d13eed5b.tar.gz",
+      "hash": "sha256-3iVX1+7YUIt23hBx1WZsUllhbmP2EnXrV8tCRbLxHc8="
     },
     "nixpkgs": {
       "type": "Git",
@@ -31,11 +47,38 @@
         "owner": "NixOS",
         "repo": "nixpkgs"
       },
+      "branch": "nixos-unstable",
+      "submodules": false,
+      "revision": "d6c71932130818840fc8fe9509cf50be8c64634f",
+      "url": "https://github.com/NixOS/nixpkgs/archive/d6c71932130818840fc8fe9509cf50be8c64634f.tar.gz",
+      "hash": "sha256-ub1gpAONMFsT/GU2hV6ZWJjur8rJ6kKxdm9IlCT0j84="
+    },
+    "pyproject-nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "pyproject-nix",
+        "repo": "pyproject.nix"
+      },
       "branch": "master",
-      "revision": "60f0924f468590dde6787ae00ea37d05ca81931f",
-      "url": "https://github.com/NixOS/nixpkgs/archive/60f0924f468590dde6787ae00ea37d05ca81931f.tar.gz",
-      "hash": "0v3wlxqifaqzj4sjnd461h7b81lmk10hg6c9765h0zzxyzk5bml9"
+      "submodules": false,
+      "revision": "b0d513eeeebed6d45b4f2e874f9afba2021f7812",
+      "url": "https://github.com/pyproject-nix/pyproject.nix/archive/b0d513eeeebed6d45b4f2e874f9afba2021f7812.tar.gz",
+      "hash": "sha256-kwCOegKLZJM9v/e/7cqwg1p/YjjTAukKPqmxKnAZRgA="
+    },
+    "uv2nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "pyproject-nix",
+        "repo": "uv2nix"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "661dadc1e3ff53142e1554172ab60c667de2c1d5",
+      "url": "https://github.com/pyproject-nix/uv2nix/archive/661dadc1e3ff53142e1554172ab60c667de2c1d5.tar.gz",
+      "hash": "sha256-jXydlwsCseO9F0YKPBMpPTWTS4JM7QDVIXaHvjfI1hg="
     }
   },
-  "version": 3
+  "version": 7
 }
