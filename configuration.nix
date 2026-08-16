@@ -37,7 +37,7 @@ in
 
   users.users.kamiladcr = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     initialPassword = "demo";
     uid = 1000;
   };
@@ -81,6 +81,8 @@ in
   programs.light.enable = true;
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
+  services.blueman.enable = true;
 
   services.onedrive.enable = true;
 
@@ -92,8 +94,24 @@ in
   services.tlp = {
     enable = true;
     settings = {
-      CPU_SCALING_GOVERNOR_ON_BAT="powersave";
-      CPU_SCALING_GOVERNOR_ON_AC="performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      CPU_BOOST_ON_BAT = 0;
+      CPU_BOOST_ON_AC = 1;
+
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+      PLATFORM_PROFILE_ON_AC = "performance";
+
+      WIFI_PWR_ON_BAT = "on";
+
+      RUNTIME_PM_ON_BAT = "auto";
+      RUNTIME_PM_ON_AC = "on";
+
+      PCIE_ASPM_ON_BAT = "powersupersave";
     };
   };
 
@@ -142,6 +160,7 @@ in
     libreoffice
     mpv
     nautilus
+    obs-studio
     nixos-option
     npins
     obsidian

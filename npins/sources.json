@@ -23,9 +23,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "ce72db30d4228b9f0ab36fdb006bf743a8fdb813",
-      "url": "https://codeberg.org/ezemtsov/ewm/archive/ce72db30d4228b9f0ab36fdb006bf743a8fdb813.tar.gz",
-      "hash": "sha256-ukdLOa9ucrRap+NssPX5vFm73pEgKByx5LDT4hr+EXs="
+      "revision": "43f6b5ec82b336aef1acf0f78a016ba909a62b4d",
+      "url": "https://codeberg.org/ezemtsov/ewm/archive/43f6b5ec82b336aef1acf0f78a016ba909a62b4d.tar.gz",
+      "hash": "sha256-QBT0N9ozw5RkJxp8H23p4hoJSP19IQoR+85WC8rTcyI="
     },
     "home-manager": {
       "type": "Git",
