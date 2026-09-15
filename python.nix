@@ -33,7 +33,7 @@ let
 
   # Construct package set
   pythonSet = (pkgs.callPackage pyproject-nix.build.packages {
-    python = pkgs.python3;
+    python = pkgs.python313;
   }).overrideScope (lib.composeManyExtensions [
     # Build system packages
     pyproject-build-systems.default
@@ -43,7 +43,6 @@ let
 
     # Patches for packages that need additional buildInputs
     (self: super: {
-      # Fix setuptools missing
       hdbscan = super.hdbscan.overrideAttrs (old: {
         nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
           self.setuptools

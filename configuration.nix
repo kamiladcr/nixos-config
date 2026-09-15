@@ -9,12 +9,15 @@ in
       "${sources.home-manager}/nixos" # Home dotfiles
       ./hardware-configuration.nix
       ./desktop.nix
-      "${sources.ewm}/nix/service.nix"
     ];
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Disable amdgpu Panel Self Refresh (PSR): triggers a DC/DMUB warning and can
+  # freeze the eDP output when hotplugging the external monitor (dmub_psr_enable).
+  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
 
   networking.hostName = "oslo";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -78,7 +81,6 @@ in
   # Mount USB drives automatically
   services.gvfs.enable = true;
 
-  programs.light.enable = true;
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
@@ -87,6 +89,7 @@ in
   services.onedrive.enable = true;
 
   services.tailscale.enable = true;
+
 
   # Power saving
   powerManagement.enable = true;
@@ -142,8 +145,9 @@ in
   environment.systemPackages = with pkgs; [
     alacritty
     bottom
+    brightnessctl
     claude-code
-    emacs30-pgtk
+    emacs-pgtk
     emacsPackages.jinx
     enchant
     firefox
@@ -160,9 +164,10 @@ in
     libreoffice
     mpv
     nautilus
-    obs-studio
     nixos-option
+    nodejs
     npins
+    obs-studio
     obsidian
     onedrive
     osmium-tool

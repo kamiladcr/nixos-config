@@ -9,20 +9,10 @@
 
   # Windows
   programs.niri.enable = true;
-  programs.ewm.enable = true;
 
   # Shell (top panel)
   programs.dms-shell = {
     enable = true;
-    package = pkgs.dms-shell.overrideAttrs {
-      vendorHash = "sha256-cVUJXgzYMRSM0od1xzDVkMTdxHu3OIQX2bQ8AJbGQ1Q=";
-      src = pkgs.fetchFromGitHub {
-        owner = "AvengeMedia";
-        repo = "DankMaterialShell";
-        rev = "9723661c80babc97637319d312eeeb2a3e53f8a7";
-        hash = "sha256-3/8DjcoLrqWrJR8QyyzvsFOeej4V5JIq4kMYQF0vccs=";
-      };
-    };
     systemd.enable = true;
     systemd.restartIfChanged = true;
   };
