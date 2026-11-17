@@ -43,4 +43,5 @@ dependencies = [
     "hdbscan>=0.8.40",
     "Cython<3",
     "dask==2025.9.1",
+    "equipop>=1.63.7",
 ]

@@ -10,6 +10,12 @@
   # Windows
   programs.niri.enable = true;
 
+  # https://codeberg.org/ezemtsov/ewm
+  programs.ewm.enable = true;
+
+  # Battery status over D-Bus, needed for the dms-shell battery widget
+  services.upower.enable = true;
+
   # Shell (top panel)
   programs.dms-shell = {
     enable = true;
@@ -27,6 +33,11 @@
     xwayland-satellite
     swaylock
     rofi
+
+    # Screenshot: interactive area select, copies to clipboard
+    (writeShellScriptBin "screenshot" ''
+      ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${wl-clipboard}/bin/wl-copy
+    '')
   ];
 
   # Environment variables
@@ -38,69 +49,6 @@
   # Home-directory configuration
   home-manager.useGlobalPkgs = true;
   home-manager.users.kamiladcr = {
-    # Notifications
-    services.dunst.enable = true;
-
-    # Status bar
-    programs.waybar.enable = true;
-    programs.waybar.settings.main = {
-      height = 20;
-      layer = "top";
-      position = "top";
-      modules-left = [
-        "niri/workspaces"
-        "wlr/taskbar"
-      ];
-      modules-right = [
-        "tray"
-        "niri/language"
-        "disk"
-        "network"
-        "clock"
-        "battery"
-      ];
-      clock = {
-        format = "{:%d-%m-%Y %H:%M}";
-      };
-      "wlr/taskbar" = {
-        on-click = "activate";
-      };
-      "niri/language" = {
-        format = "{short}";
-      };
-      disk = {
-        format = "{free}";
-      };
-      network = {
-        interface = "wlp194s0";
-        format = "{ifname}";
-        format-wifi = "{essid} ({signalStrength}%)";
-      };
-    };
-    programs.waybar.style = ''
-      * {
-          background: transparent;
-          color: white;
-          padding: 0 3px;
-          font-family: JetBrainsMono;
-          font-size: 12px;
-          border-radius: 0px;
-      }
-      #tray menu {
-        background-color: #333333;
-        color: white;
-      }
-      #tray menu menuitem:hover {
-        background-color: gray;
-      }
-      #workspaces button.focused {
-        background-color: #333333;
-      }
-      #battery.charging {
-          background-color: #333333;
-      }
-    '';
-
     programs.rofi = {
       enable = true;
       package = pkgs.rofi;

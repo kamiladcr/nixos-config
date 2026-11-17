@@ -13,6 +13,20 @@
       "url": "https://github.com/pyproject-nix/build-system-pkgs/archive/150839ac67b5a34db56a55e8f6b7099a4e7878ab.tar.gz",
       "hash": "sha256-XKJP4KvhawV3pyVfraX3sflz05Rp7KP74gRt6QqKjNE="
     },
+    "ewm": {
+      "type": "Git",
+      "repository": {
+        "type": "Forgejo",
+        "server": "https://codeberg.org/",
+        "owner": "ezemtsov",
+        "repo": "ewm"
+      },
+      "branch": "master",
+      "submodules": false,
+      "revision": "012040c011a27e91e60786845cb613a07b5a6365",
+      "url": "https://codeberg.org/ezemtsov/ewm/archive/012040c011a27e91e60786845cb613a07b5a6365.tar.gz",
+      "hash": "sha256-v/udQChvgKtmIx9TKrWWTG6G/IcTuVZvNhNmTAZcVp4="
+    },
     "home-manager": {
       "type": "Git",
       "repository": {
@@ -66,5 +80,5 @@
       "hash": "sha256-AELmsXPI546MhbC/ZXC7WRUkCz7d4rqKTHUmliIgPpI="
     }
   },
-  "version": 7
+  "version": 8
 }

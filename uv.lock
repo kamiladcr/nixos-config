@@ -58,7 +58,7 @@ resolution-markers = [
     "python_full_version >= '3.14'",
 ]
 dependencies = [
-    { name = "cffi", marker = "python_full_version >= '3.14'" },
+    { name = "cffi" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/b9/e9/184b8ccce6683b0aa2fbb7ba5683ea4b9c5763f1356347f1312c32e3c66e/argon2-cffi-bindings-21.2.0.tar.gz", hash = "sha256:bb89ceffa6c791807d1305ceb77dbfacc5aa499891d2c55661c6459651fc39e3", size = 1779911, upload-time = "2021-12-01T08:52:55.68Z" }
 wheels = [
@@ -82,7 +82,7 @@ resolution-markers = [
     "python_full_version < '3.14'",
 ]
 dependencies = [
-    { name = "cffi", marker = "python_full_version < '3.14'" },
+    { name = "cffi" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5c/2d/db8af0df73c1cf454f71b2bbe5e356b8c1f8041c979f505b3d3186e520a9/argon2_cffi_bindings-25.1.0.tar.gz", hash = "sha256:b957f3e6ea4d55d820e40ff76f450952807013d361a65d7f28acc0acbf29229d", size = 1783441, upload-time = "2025-07-30T10:02:05.147Z" }
 wheels = [
@@ -511,6 +511,21 @@ wheels = [
 ]
 
 [[package]]
+name = "equipop"
+version = "1.63.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pandas" },
+    { name = "pyproj" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e3/bf/47cf6e4439889783dc689daafca4d7bf8e7bb6581c7210726420cc80b96d/equipop-1.63.7.tar.gz", hash = "sha256:09b5cb81c31dfc3af6ba743f77d0665bd2f6ec1599f9fa096578621956b906d8", size = 5583375, upload-time = "2026-11-10T09:22:21.097Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/11/42/94fb81d5f5c4e77119689991dde6d427e9f1e98dcfdf5738493fdd351060/equipop-1.63.7-py3-none-any.whl", hash = "sha256:352af4e94be5a3acee25ff2eef332a6bbb1788636e667df812c3d850f78a916e", size = 2862551, upload-time = "2026-11-10T09:22:19.164Z" },
+]
+
+[[package]]
 name = "et-xmlfile"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -652,6 +667,7 @@ dependencies = [
     { name = "dash" },
     { name = "dash-bootstrap-components" },
     { name = "dask" },
+    { name = "equipop" },
     { name = "folium" },
     { name = "geopandas" },
     { name = "hdbscan" },
@@ -692,6 +708,7 @@ requires-dist = [
     { name = "dash", specifier = ">=2.14.2" },
     { name = "dash-bootstrap-components", specifier = ">=1.5.0" },
     { name = "dask", specifier = "==2025.9.1" },
+    { name = "equipop", specifier = ">=1.63.7" },
     { name = "folium", specifier = ">=0.15.1" },
     { name = "geopandas", specifier = ">=0.14.2" },
     { name = "hdbscan", specifier = ">=0.8.40" },
@@ -900,6 +917,14 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b5/71/f55389c2fb62d12c2bfcff5531b1ba6b4d4e124373d55fd7b62907a3d895/jenkspy-0.4.1-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:8fdd9d691754c0a05861c8f9c98ab95cbe9f4bd9fc6a699169ea724b7a9a35fa", size = 226856, upload-time = "2025-02-14T15:25:54.378Z" },
     { url = "https://files.pythonhosted.org/packages/e1/7d/36772e3ed1f727315f9f839efbd371615607c427a0b419bfa0bcc57da7fa/jenkspy-0.4.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d17239c6166d7202140158f49d2f2a2fb33c6b46021c5efa4ecda348c07aa54a", size = 638126, upload-time = "2025-02-14T15:25:26.418Z" },
     { url = "https://files.pythonhosted.org/packages/cd/d9/425a5ead8bacf10bdee19618619460ab6156e3b960d7ecf1179eb3c23f65/jenkspy-0.4.1-cp313-cp313-win_amd64.whl", hash = "sha256:d6ba6527ec791419bee9fba76328b13cdf92735df5d1caa74f0475a18c6f01f5", size = 224501, upload-time = "2025-02-14T15:26:13.545Z" },
+    { url = "https://files.pythonhosted.org/packages/0d/a3/e66138a885f5bc56e2114ae46c1494de1e33f5cf1a3dbbdcd0276601e40a/jenkspy-0.4.1-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:21e47a7416833bb25d32183d71ea0cb57f2f19429d5f6619b99a5811d47b864c", size = 241609, upload-time = "2026-02-13T17:29:56.441Z" },
+    { url = "https://files.pythonhosted.org/packages/d5/f2/9c082c37cd424e36281f22a1e5b21ea2335be7d8cab2e8546a34b40052f0/jenkspy-0.4.1-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:fb0b6a8a78d06a7fbb9ab60fb226469002d65ada199e820b25688b83ce4afc88", size = 239525, upload-time = "2026-02-13T17:29:58.022Z" },
+    { url = "https://files.pythonhosted.org/packages/97/bc/084d48f12525d8f56f1fb57875a3426c9d1d2fe73aadecff557b04194459/jenkspy-0.4.1-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:07ce9e84a6992ff4dfb0289858d5ce181f108bab04e22c7822f184d325d5c867", size = 624465, upload-time = "2026-02-13T17:29:59.814Z" },
+    { url = "https://files.pythonhosted.org/packages/1f/e6/24069887fa9590bd30ada7f8de24cce97851750d3daac210e7b6217198e3/jenkspy-0.4.1-cp314-cp314-win_amd64.whl", hash = "sha256:c5fe8bd09c11476eb86cad03edd4a8cd51a7ab1198b39c7d9fccaf3f75e66f58", size = 232205, upload-time = "2026-02-13T17:30:08.714Z" },
+    { url = "https://files.pythonhosted.org/packages/c5/4d/53568a704dd1da9b54d82f7b9d052f78aeeb5535d6430f4558c837492e84/jenkspy-0.4.1-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:6bede5b05168ecc88917eb96e60ede0630f9dc44864f5756a5fef5383f93a238", size = 246630, upload-time = "2026-02-13T17:30:01.619Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/54/756977de0b0838a25fed6a99d75c949ac5349e42cc96d334becef6431b34/jenkspy-0.4.1-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:73ea30c85fb2ac5e51d4e49ab181b212c6941f43a48b57ec74ea4667b1df3c74", size = 245802, upload-time = "2026-02-13T17:30:02.917Z" },
+    { url = "https://files.pythonhosted.org/packages/ea/58/77113e8dadbdfc060afda90406e5daa6582903069654b8dda5e8a1796061/jenkspy-0.4.1-cp314-cp314t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:597a4211b1f3e28b807cafa7de7317360fe58a3fd5bef524d550024a46d3f528", size = 623978, upload-time = "2026-02-13T17:30:04.353Z" },
+    { url = "https://files.pythonhosted.org/packages/a7/92/6c297f2f125e9f2200a51d9d53cb9fa9c71940598c4d486a393686b2769d/jenkspy-0.4.1-cp314-cp314t-win_amd64.whl", hash = "sha256:bd590f1c3376765f421dbd5817f16779a37c4522c922c6481242ab56e14d9849", size = 244715, upload-time = "2026-02-13T17:30:06.827Z" },
 ]
 
 [[package]]

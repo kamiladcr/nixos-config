@@ -7,6 +7,7 @@ in
   imports =
     [
       "${sources.home-manager}/nixos" # Home dotfiles
+      "${sources.ewm}/nix/service.nix" # EWM (Emacs Wayland Manager)
       ./hardware-configuration.nix
       ./desktop.nix
     ];
@@ -28,6 +29,8 @@ in
   # Life in Oslo
   time.timeZone = "Europe/Oslo";
 
+  services.openssh.enable = true;
+
   # User configuration
   # nix.package = pkgs.nix_2_3; # Latest nice nix version
   nix.settings.trusted-users = [ "kamiladcr" ];
@@ -35,7 +38,7 @@ in
 
   nix.nixPath = ["nixpkgs=${sources.nixpkgs}:nixos-config=/etc/nixos/configuration.nix"];
   nixpkgs.pkgs = (import sources.nixpkgs {
-    config.allowUnfree = lib.mkForce true;
+    config.allowUnfree = true;
   });
 
   users.users.kamiladcr = {
@@ -48,23 +51,15 @@ in
   # Internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # # Enable the X11 windowing system.
-  # services.xserver.enable = true;
 
-  # # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
+  services.displayManager.defaultSession = "ewm";
   # # services.xserver.desktopManager.gnome.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
+  # Enable CUPS to print documents
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
+  # Enable sound with pipewire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -93,30 +88,7 @@ in
 
   # Power saving
   powerManagement.enable = true;
-  services.power-profiles-daemon.enable = lib.mkForce false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_BOOST_ON_BAT = 0;
-      CPU_BOOST_ON_AC = 1;
-
-      PLATFORM_PROFILE_ON_BAT = "low-power";
-      PLATFORM_PROFILE_ON_AC = "performance";
-
-      WIFI_PWR_ON_BAT = "on";
-
-      RUNTIME_PM_ON_BAT = "auto";
-      RUNTIME_PM_ON_AC = "on";
-
-      PCIE_ASPM_ON_BAT = "powersupersave";
-    };
-  };
+  services.power-profiles-daemon.enable = true;
 
   # Using fish instead of bash
   programs.fish.enable = true;
@@ -126,7 +98,9 @@ in
   environment.sessionVariables.TERMINAL = [ "alacritty" ];
 
   fonts.packages = with pkgs; [
+    ibm-plex
     iosevka
+    jetbrains-mono
     lora
     montserrat
   ];
@@ -169,7 +143,6 @@ in
     npins
     obs-studio
     obsidian
-    onedrive
     osmium-tool
     pandoc
     pavucontrol
